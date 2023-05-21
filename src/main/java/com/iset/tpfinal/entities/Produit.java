@@ -1,9 +1,13 @@
 package com.iset.tpfinal.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -11,20 +15,31 @@ public class Produit {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long idProduit;
+    @NotNull
+    @Size(min = 4,max = 15)
     private String nomProduit;
+    @Min(value = 10)
+    @Max(value = 10000)
     private Double prixProduit;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PastOrPresent
+
     private Date dateCreation;
+    @ManyToOne
+    private Categorie categorie;
 
     public Produit() {
         super();
     }
 
 
-    public Produit(String nomProduit, Double prixProduit, Date dateCreation) {
+    public Produit(String nomProduit, Double prixProduit, Date dateCreation, Categorie categorie) {
         super();
         this.nomProduit = nomProduit;
         this.prixProduit = prixProduit;
         this.dateCreation = dateCreation;
+        this.categorie= categorie ;
     }
 
 
@@ -51,6 +66,13 @@ public class Produit {
     }
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
+    }
+
+    public Categorie getcategorie() {
+        return categorie;
+    }
+    public void setCategorie(Categorie Categorie) {
+        this.categorie = Categorie;
     }
 
 

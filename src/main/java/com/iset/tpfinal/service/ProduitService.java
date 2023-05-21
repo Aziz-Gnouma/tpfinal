@@ -2,6 +2,7 @@ package com.iset.tpfinal.service;
 
 import com.iset.tpfinal.entities.Produit;
 import com.iset.tpfinal.entities.Produit;
+import jdk.jfr.Category;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -15,6 +16,14 @@ public interface ProduitService {
     List<Produit> getAllProduits();
 
     Page<Produit> getAllProduitsParPage(int page, int size);
+    List<Produit> findByNomProduit(String nom);
+    List<Produit> findByNomProduitContains(String nom);
+    List<Produit> findByNomPrix (String nom, Double prix);
+    List<Produit> findByCategorie (Category categorie);
+    List<Produit> findByCategorieIdCat(Long id);
+    List<Produit> findByOrderByNomProduitAsc();
+    List<Produit> trierProduitsNomsPrix();
+
 
 }
 

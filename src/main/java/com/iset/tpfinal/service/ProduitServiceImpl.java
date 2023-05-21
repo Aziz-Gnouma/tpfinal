@@ -1,7 +1,9 @@
 package com.iset.tpfinal.service;
 
 import com.iset.tpfinal.Repository.ProduitRepository;
+import com.iset.tpfinal.entities.Categorie;
 import com.iset.tpfinal.entities.Produit;
+import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProduitServiceImpl implements ProduitService{
+public class ProduitServiceImpl implements ProduitService {
 
     @Autowired
     ProduitRepository produitRepository;
@@ -47,13 +49,46 @@ public class ProduitServiceImpl implements ProduitService{
 
         return produitRepository.findAll();
     }
+
     @Override
     public Page<Produit> getAllProduitsParPage(int page, int size) {
         // TODO Auto-generated method stub
         return produitRepository.findAll(PageRequest.of(page, size));
     }
 
+    @Override
+    public List<Produit> findByNomProduit(String nom) {
+        return produitRepository.findByNomProduit(nom);
+    }
 
+    @Override
+    public List<Produit> findByNomProduitContains(String nom) {
+        return null;
+    }
 
+    @Override
+    public List<Produit> findByNomPrix(String nom, Double prix) {
+        return null;
+    }
+
+    @Override
+    public List<Produit> findByCategorie(Category categorie) {
+        return null;
+    }
+
+    @Override
+    public List<Produit> findByCategorieIdCat(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Produit> findByOrderByNomProduitAsc() {
+        return null;
+    }
+
+    @Override
+    public List<Produit> trierProduitsNomsPrix() {
+        return null;
+    }
 
 }
